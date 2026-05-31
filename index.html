@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="SonarQube — Code verification for the AI era. Fight AI slop with automated, explainable code review for quality, reliability, and security."
+    />
+    <title>SonarQube — Code verification for the AI era</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Saira:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header" id="home">
+        <nav class="navbar" aria-label="Primary navigation">
+          <a class="brand" href="#home" aria-label="Sonar home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+                <path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </span>
+            <span class="brand-text">sonar</span>
+          </a>
+          <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span class="sr-only">Toggle navigation</span>
+          </button>
+          <div class="nav-menu" id="nav-menu">
+            <a href="#capabilities">Server</a>
+            <a href="#capabilities">Cloud</a>
+            <a href="#capabilities">IDE</a>
+            <a href="#deploy">Docs</a>
+            <a href="#deploy">Pricing</a>
+          </div>
+          <div class="nav-actions">
+            <a class="btn btn-ghost" href="#cta">Log in</a>
+            <a class="btn btn-primary btn-sm" href="#cta">Get started</a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero section-pad" aria-labelledby="hero-title">
+          <div class="hero-inner reveal">
+            <p class="eyebrow">SonarQube</p>
+            <h1 id="hero-title">Code verification for the AI era</h1>
+            <p class="hero-text">
+              Fight AI slop. Improve quality, reliability, and security through automated,
+              explainable, compliant code review.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#cta">Request trial</a>
+              <a class="btn btn-secondary" href="#deploy">Compare plans</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="trust-strip" aria-label="Trusted by developers worldwide">
+          <p class="trust-label">Trusted by over 7M developers worldwide</p>
+          <div class="logo-row" aria-hidden="true">
+            <span class="logo-slot">MB</span>
+            <span class="logo-slot">NV</span>
+            <span class="logo-slot">ST</span>
+            <span class="logo-slot">AC</span>
+            <span class="logo-slot">GE</span>
+            <span class="logo-slot">OR</span>
+          </div>
+        </section>
+
+        <section class="gartner section-pad-alt" aria-labelledby="gartner-title">
+          <div class="gartner-card reveal">
+            <p class="eyebrow">Gartner Magic Quadrant · 2026</p>
+            <h2 id="gartner-title">Gartner® names Sonar a Magic Quadrant™ Leader</h2>
+            <p>
+              AI is generating code faster than teams can govern it. Sonar was named a Leader,
+              and placed highest on Ability to Execute. We built the verification layer the AI
+              development cycle actually needs.
+            </p>
+            <a class="btn btn-secondary" href="#cta">Get the report</a>
+          </div>
+        </section>
+
+        <section class="build-trust section-pad" aria-labelledby="trust-title">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Build trust</p>
+            <h2 id="trust-title">The trust and verification layer for your AI code</h2>
+            <p>
+              Find and fix issues early in the development process with deep static analysis and
+              real-time feedback that seamlessly integrates into your existing workflow.
+            </p>
+          </div>
+          <div class="feature-grid reveal">
+            <article class="feature-card">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke-linecap="round" />
+                  <circle cx="12" cy="12" r="4" />
+                </svg>
+              </span>
+              <h3>Quality metrics</h3>
+              <p>Track maintainability, reliability, and technical debt across your entire codebase.</p>
+            </article>
+            <article class="feature-card">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M12 2l7 4v6c0 5-3 9-7 10C8 21 5 17 5 12V6l7-4z" />
+                  <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <h3>Security analysis</h3>
+              <p>Detect complex vulnerabilities and security hotspots before they reach production.</p>
+            </article>
+            <article class="feature-card">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke-linecap="round" />
+                </svg>
+              </span>
+              <h3>Remediation</h3>
+              <p>Automatically generate code fix suggestions with a click, minimizing manual debugging.</p>
+            </article>
+            <article class="feature-card">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M4 7h6v6H4zM14 7h6v6h-6zM4 17h6v4H4zM14 17h6v4h-6z" />
+                </svg>
+              </span>
+              <h3>CI/CD integration</h3>
+              <p>Seamlessly integrate with your existing development workflow and tools.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="deploy section-pad-alt" id="deploy" aria-labelledby="deploy-title">
+          <div class="section-heading reveal">
+            <h2 id="deploy-title">One platform.<br />Two ways to deploy.</h2>
+          </div>
+          <div class="deploy-toggle reveal" role="tablist" aria-label="Deployment options">
+            <button class="deploy-tab active" type="button" role="tab" aria-selected="true" data-deploy="saas">
+              SaaS
+            </button>
+            <button class="deploy-tab" type="button" role="tab" aria-selected="false" data-deploy="self">
+              Self-hosted
+            </button>
+          </div>
+          <div class="deploy-cards reveal">
+            <article class="deploy-card active" data-deploy-panel="saas">
+              <h3>SonarQube Cloud — fully managed SaaS</h3>
+              <p>
+                Elastic, cloud-native code analysis that scales instantly with your team — delivered
+                as a service so you can focus on shipping, not infrastructure.
+              </p>
+              <ul>
+                <li>Up and running in minutes</li>
+                <li>Zero infrastructure to manage</li>
+                <li>Automatic updates and feature rollouts</li>
+                <li>99.9% uptime SLA · SOC 2 Type II</li>
+              </ul>
+              <dl class="deploy-meta">
+                <div><dt>Time to value</dt><dd>Live in under 10 minutes</dd></div>
+                <div><dt>Best for</dt><dd>Cloud-native teams, fast-moving DevOps</dd></div>
+                <div><dt>Maintenance</dt><dd>Handled by Sonar — you focus on code</dd></div>
+              </dl>
+            </article>
+            <article class="deploy-card" data-deploy-panel="self">
+              <h3>SonarQube Server — self-managed for maximum control</h3>
+              <p>
+                Deploy inside your perimeter for full data residency and deep, deterministic security
+                and quality insights across your entire enterprise.
+              </p>
+              <ul>
+                <li>Complete data residency and privacy control</li>
+                <li>Custom configurations and enterprise integrations</li>
+                <li>Air-gapped deployment options available</li>
+                <li>Dedicated support and professional services</li>
+              </ul>
+              <dl class="deploy-meta">
+                <div><dt>Time to value</dt><dd>Tailored rollout with your team</dd></div>
+                <div><dt>Best for</dt><dd>Regulated industries, large enterprises</dd></div>
+                <div><dt>Maintenance</dt><dd>You control upgrades and infrastructure</dd></div>
+              </dl>
+            </article>
+          </div>
+          <p class="deploy-note reveal">
+            Not sure which fits? <strong>We'll help you decide during the trial.</strong>
+            <a href="#cta">Request a trial →</a>
+          </p>
+        </section>
+
+        <section class="capabilities section-pad" id="capabilities" aria-labelledby="caps-title">
+          <div class="section-heading reveal">
+            <p class="eyebrow">SonarQube core capabilities</p>
+            <h2 id="caps-title">Everything you need to verify code at scale</h2>
+          </div>
+          <div class="tab-bar reveal" role="tablist" aria-label="Core capabilities">
+            <button class="tab active" type="button" role="tab" aria-selected="true" data-tab="review">
+              Automated code review
+            </button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-tab="static">
+              Static code analysis
+            </button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-tab="devex">
+              Developer experience
+            </button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-tab="ai">
+              AI Code Assurance
+            </button>
+          </div>
+          <div class="tab-panels reveal">
+            <div class="tab-panel active" data-panel="review" role="tabpanel">
+              <ul>
+                <li><strong>Seamless integration:</strong> Integrate SonarQube into your development pipeline for comprehensive code reviews on all projects.</li>
+                <li><strong>Automated scanning:</strong> Scans all branches, pull requests, and merges as soon as code is committed or pushed.</li>
+                <li><strong>Expert analysis:</strong> Applies expertly curated rules and industry compliance standards during scans.</li>
+                <li><strong>Real-time feedback:</strong> Receive immediate, automated feedback within your code review and DevOps tools.</li>
+              </ul>
+              <a href="#cta" class="link-arrow">Learn more</a>
+            </div>
+            <div class="tab-panel" data-panel="static" role="tabpanel" hidden>
+              <ul>
+                <li><strong>7,000+ rules:</strong> Language-specific detection for bugs, code smells, and vulnerabilities.</li>
+                <li><strong>Cross-file analysis:</strong> Sophisticated data-flow tracking across modules and functions.</li>
+                <li><strong>Quality gates:</strong> Enforce go/no-go thresholds before merge and release.</li>
+                <li><strong>Branch analysis:</strong> Compare new code against your main branch on every PR.</li>
+              </ul>
+              <a href="#cta" class="link-arrow">Learn more</a>
+            </div>
+            <div class="tab-panel" data-panel="devex" role="tabpanel" hidden>
+              <ul>
+                <li><strong>IDE feedback:</strong> SonarQube for IDE surfaces issues as you type with quick-fix guidance.</li>
+                <li><strong>Connected mode:</strong> Sync rules between IDE and server for consistent standards.</li>
+                <li><strong>Pull request decoration:</strong> Actionable summaries directly in GitHub, GitLab, and Azure DevOps.</li>
+                <li><strong>Low friction:</strong> Stay in flow — fix problems without leaving your editor.</li>
+              </ul>
+              <a href="#cta" class="link-arrow">Learn more</a>
+            </div>
+            <div class="tab-panel" data-panel="ai" role="tabpanel" hidden>
+              <ul>
+                <li><strong>AI-generated code:</strong> Validate AI output for quality and security before production.</li>
+                <li><strong>Deep issue detection:</strong> Finds risks traditional analysis may overlook in generated code.</li>
+                <li><strong>AI CodeFix:</strong> Context-aware fix suggestions powered by LLMs in your workflow.</li>
+                <li><strong>Governance:</strong> Align AI and developer standards across the SDLC.</li>
+              </ul>
+              <a href="#cta" class="link-arrow">Learn more</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="codefix section-pad-alt" aria-labelledby="codefix-title">
+          <div class="codefix-inner reveal">
+            <p class="eyebrow">AI-powered remediation</p>
+            <h2 id="codefix-title">Instant code fixes at your fingertips</h2>
+            <p>
+              Resolve coding issues in an instant. SonarQube's AI CodeFix uses LLMs to generate
+              context-aware fix suggestions right in your workflow.
+            </p>
+            <ul>
+              <li>Get context-aware, AI-powered fixes for bugs and security issues.</li>
+              <li>Resolve complex problems with a single click, directly in your workflow.</li>
+              <li>Free up developer time to focus on new features and business value.</li>
+            </ul>
+            <a href="#cta" class="btn btn-primary">Learn more</a>
+          </div>
+        </section>
+
+        <section class="security section-pad" aria-labelledby="security-title">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Security capabilities</p>
+            <h2 id="security-title">Developer-led code security</h2>
+            <p>
+              Empower developers with real-time, actionable guidance to detect and fix vulnerabilities
+              as code is written and reviewed, directly in their workflow.
+            </p>
+          </div>
+          <div class="tab-bar tab-bar-scroll reveal" role="tablist" aria-label="Security capabilities">
+            <button class="tab active" type="button" role="tab" aria-selected="true" data-sec-tab="sast">SAST</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-sec-tab="taint">Taint analysis</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-sec-tab="secrets">Secrets detection</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-sec-tab="iac">IaC scanning</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-sec-tab="advanced">Advanced SAST</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-sec-tab="sca">SCA</button>
+          </div>
+          <div class="tab-panels reveal">
+            <div class="tab-panel active" data-sec-panel="sast" role="tabpanel">
+              <h3>Static Application Security Testing (SAST)</h3>
+              <p>Our SAST engine automatically finds critical vulnerabilities in your development workflow, stopping them before they reach production.</p>
+              <ul>
+                <li><strong>Broad language support:</strong> Java, JavaScript, Python, C++, C#, and many more.</li>
+                <li><strong>Workflow integration:</strong> Immediate feedback in your IDE and CI/CD pipeline.</li>
+                <li><strong>Rapid remediation:</strong> Clear guidance and AI-powered CodeFix suggestions.</li>
+                <li><strong>Customizable policies:</strong> Enforce your organization's security standards.</li>
+              </ul>
+            </div>
+            <div class="tab-panel" data-sec-panel="taint" role="tabpanel" hidden>
+              <h3>Taint analysis</h3>
+              <p>Our taint analysis engine tracks data flow to find and stop critical injection vulnerabilities.</p>
+              <ul>
+                <li><strong>Injection flaws:</strong> SQL injection, XSS, SSRF, and more.</li>
+                <li><strong>Minimize false positives:</strong> Cross-file and cross-function analysis for accurate results.</li>
+                <li><strong>Framework-aware:</strong> Understands native security controls in popular frameworks.</li>
+              </ul>
+            </div>
+            <div class="tab-panel" data-sec-panel="secrets" role="tabpanel" hidden>
+              <h3>Secrets detection</h3>
+              <p>Detect leaked code secrets throughout your development workflow, in the IDE and CI/CD pipeline.</p>
+              <ul>
+                <li><strong>Comprehensive coverage:</strong> API keys, passwords, and tokens across cloud providers.</li>
+                <li><strong>High-fidelity scanning:</strong> Regex and semantic analysis to minimize false positives.</li>
+                <li><strong>Shift-left:</strong> Remove secrets before they are committed to the repository.</li>
+              </ul>
+            </div>
+            <div class="tab-panel" data-sec-panel="iac" role="tabpanel" hidden>
+              <h3>Infrastructure as Code (IaC) scanning</h3>
+              <p>Find and fix IaC misconfigurations before they reach production to secure your cloud.</p>
+              <ul>
+                <li><strong>Broad coverage:</strong> Terraform, CloudFormation, Kubernetes, ARM, Ansible.</li>
+                <li><strong>Key risks:</strong> Overly permissive access, exposed services, insecure defaults.</li>
+                <li><strong>Actionable remediation:</strong> Step-by-step guidance to fix misconfigurations quickly.</li>
+              </ul>
+            </div>
+            <div class="tab-panel" data-sec-panel="advanced" role="tabpanel" hidden>
+              <h3>Advanced SAST</h3>
+              <p>Identify deeper vulnerabilities due to interaction between application code and third-party libraries.</p>
+              <ul>
+                <li><strong>Dependency-aware:</strong> Traces data flows into third-party libraries.</li>
+                <li><strong>Hidden vulnerabilities:</strong> Cross-file taint analysis in open-source dependencies.</li>
+                <li><strong>Zero configuration:</strong> Runs automatically with no performance overhead.</li>
+              </ul>
+            </div>
+            <div class="tab-panel" data-sec-panel="sca" role="tabpanel" hidden>
+              <h3>Software Composition Analysis (SCA)</h3>
+              <p>Secure open-source dependencies by finding vulnerabilities, managing licenses, and inventorying your supply chain.</p>
+              <ul>
+                <li><strong>CVE detection:</strong> Find, track, and prioritize known vulnerabilities.</li>
+                <li><strong>License compliance:</strong> Flag incompatible or unapproved licenses.</li>
+                <li><strong>SBOM:</strong> Complete inventory of every component for audits.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="stats section-pad-alt" aria-label="Platform statistics">
+          <div class="section-heading reveal">
+            <h2>Trusted by development teams worldwide</h2>
+            <p>Join thousands of organizations already using SonarQube to deliver better code.</p>
+          </div>
+          <div class="stats-grid reveal">
+            <div class="stat">
+              <strong class="stat-value" data-target="7" data-suffix="M+">0</strong>
+              <span>Developers use Sonar</span>
+            </div>
+            <div class="stat">
+              <strong class="stat-value" data-target="500" data-suffix="K+">0</strong>
+              <span>Community members</span>
+            </div>
+            <div class="stat">
+              <strong class="stat-value" data-target="40" data-suffix="+">0</strong>
+              <span>Languages, frameworks, and IaC technologies</span>
+            </div>
+            <div class="stat">
+              <strong class="stat-value" data-target="30" data-suffix="B">0</strong>
+              <span>Docker downloads</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="integrations section-pad" aria-labelledby="integrations-title">
+          <div class="section-heading reveal">
+            <h2 id="integrations-title">Code quality and security in your CI/CD workflow</h2>
+            <p>
+              SonarQube is purpose-built for DevOps, embedding automated code analysis directly into
+              your pipeline and supporting the languages your teams already use.
+            </p>
+          </div>
+          <div class="chip-grid reveal" aria-label="Supported languages and integrations">
+            <span class="chip">Java</span>
+            <span class="chip">Python</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">C#</span>
+            <span class="chip">C++</span>
+            <span class="chip">Go</span>
+            <span class="chip">Kotlin</span>
+            <span class="chip">Rust</span>
+            <span class="chip">Terraform</span>
+            <span class="chip">Kubernetes</span>
+            <span class="chip">Docker</span>
+            <span class="chip">GitHub</span>
+            <span class="chip">GitLab</span>
+            <span class="chip">Azure DevOps</span>
+            <span class="chip">Bitbucket</span>
+          </div>
+        </section>
+
+        <section class="enterprise section-pad-alt" aria-labelledby="enterprise-title">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Enterprise-ready</p>
+            <h2 id="enterprise-title">Advanced features for the enterprise</h2>
+            <p>
+              Get advanced security, scalability, and compliance features built for large
+              organizations — designed to meet your most complex demands.
+            </p>
+          </div>
+          <div class="enterprise-grid reveal">
+            <article class="enterprise-card">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M12 2l7 4v6c0 5-3 9-7 10C8 21 5 17 5 12V6l7-4z" />
+                </svg>
+              </span>
+              <h3>Compliance &amp; reporting</h3>
+              <p>Automate the path to provable code compliance for regulatory requirements and industry data security standards.</p>
+            </article>
+            <article class="enterprise-card">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M4 20h16M6 20V10l6-4 6 4v10" />
+                </svg>
+              </span>
+              <h3>Quality gates &amp; profiles</h3>
+              <p>Customize quality gates, rule profiles, and thresholds to enforce coding standards at project or organization level.</p>
+            </article>
+            <article class="enterprise-card">
+              <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M6 4h12v16H6zM9 8h6M9 12h6M9 16h4" />
+                </svg>
+              </span>
+              <h3>Portfolio &amp; enterprise reporting</h3>
+              <p>Group projects into portfolios for holistic health metrics. Export PDF reports on demand or on a schedule.</p>
+            </article>
+          </div>
+          <div class="enterprise-cta reveal">
+            <a class="btn btn-secondary" href="#cta">Contact sales</a>
+          </div>
+        </section>
+
+        <section class="final-cta section-pad" id="cta" aria-labelledby="cta-title">
+          <div class="cta-card reveal">
+            <h2 id="cta-title">Build trust into every line of code</h2>
+            <p>Ready to deliver better, secure code? Get started today with the SonarQube deployment that's right for you.</p>
+            <div class="rating" aria-label="Rating 4.6 out of 5">4.6 / 5</div>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#deploy">Start free with SaaS</a>
+              <a class="btn btn-secondary" href="#deploy">Explore self-managed</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="faq section-pad-alt" aria-labelledby="faq-title">
+          <div class="section-heading reveal">
+            <h2 id="faq-title">Frequently asked questions</h2>
+          </div>
+          <div class="faq-list reveal">
+            <div class="faq-item">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-1">
+                What is SonarQube?
+                <span class="faq-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="faq-panel" id="faq-1" hidden>
+                <p>SonarQube is an industry-leading platform for automated code quality and security analysis. It enables organizations and developers to continuously review, monitor, and improve codebases by detecting bugs, vulnerabilities, and code smells early in the development process.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-2">
+                How does SonarQube work?
+                <span class="faq-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="faq-panel" id="faq-2" hidden>
+                <p>SonarQube integrates into your IDE and CI/CD processes to conduct static analysis. Real-time feedback in the IDE helps fix issues before commit; quality gates in pipelines enforce standards before merge and release.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-3">
+                Is SonarQube a SAST tool?
+                <span class="faq-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="faq-panel" id="faq-3" hidden>
+                <p>Yes. SonarQube applies static analysis to identify security vulnerabilities, bugs, and quality issues before deployment, with secrets detection and compliance automation for regulatory standards.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-4">
+                Can Sonar analyze AI-generated code?
+                <span class="faq-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="faq-panel" id="faq-4" hidden>
+                <p>Yes. AI Code Assurance validates AI-generated code for quality and security. AI CodeFix offers one-click remediation suggestions for both AI-generated and human-authored code.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-5">
+                Is SonarQube free?
+                <span class="faq-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="faq-panel" id="faq-5" hidden>
+                <p>SonarQube for IDE is free. SonarQube Cloud offers a free tier for individuals and teams. A Community Build provides open source essentials; commercial editions add enterprise features.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-6">
+                How is SonarQube integrated into CI/CD?
+                <span class="faq-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="faq-panel" id="faq-6" hidden>
+                <p>SonarQube analyzes code during build and deploy phases and decorates pull requests on GitHub, GitLab, Bitbucket, and Azure DevOps. Quality Gates fail pipelines when standards aren't met.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-7">
+                What is SonarQube AI CodeFix?
+                <span class="faq-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="faq-panel" id="faq-7" hidden>
+                <p>AI CodeFix uses LLMs to suggest one-click fixes for issues detected by static analysis, surfaced directly in your IDE when connected to SonarQube Cloud or Server.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-8">
+                How many languages does Sonar support?
+                <span class="faq-chevron" aria-hidden="true"></span>
+              </button>
+              <div class="faq-panel" id="faq-8" hidden>
+                <p>SonarQube covers more than 40 programming languages, frameworks, and IaC platforms, with over 7,000 rules spanning bugs, code smells, vulnerabilities, and security hotspots.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>Solutions</h4>
+            <a href="#security">Code security</a>
+            <a href="#security">SAST</a>
+            <a href="#security">SCA</a>
+            <a href="#security">Secrets detection</a>
+            <a href="#capabilities">AI code quality</a>
+          </div>
+          <div class="footer-col">
+            <h4>Products</h4>
+            <a href="#deploy">SonarQube Cloud</a>
+            <a href="#deploy">SonarQube Server</a>
+            <a href="#capabilities">SonarQube for IDE</a>
+            <a href="#deploy">Pricing</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#cta">About</a>
+            <a href="#cta">Careers</a>
+            <a href="#cta">Customers</a>
+            <a href="#cta">Contact us</a>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="#gartner-title">Product demos</a>
+            <a href="#faq">Support</a>
+            <a href="#cta">ROI calculator</a>
+            <a href="#cta">Community</a>
+          </div>
+          <div class="footer-col">
+            <h4>Knowledge</h4>
+            <a href="#faq">Blog</a>
+            <a href="#integrations-title">Languages</a>
+            <a href="#capabilities">Documentation</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <a class="brand brand-footer" href="#home">
+            <span class="brand-text">sonar</span>
+          </a>
+          <p>© 2026 SonarSource Sàrl. All rights reserved.</p>
+          <div class="footer-legal">
+            <a href="#home">Terms of Use</a>
+            <a href="#home">Privacy</a>
+            <a href="#home">Cookie Policy</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
