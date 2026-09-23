@@ -1,0 +1,31 @@
+{
+  "name": "mean-stack-practicals",
+  "version": "1.0.0",
+  "description": "MEAN Stack Lab Practicals and Exercises",
+  "main": "3_express_welcome.js",
+  "scripts": {
+    "start:q1": "node 1_mongodb_queries.js",
+    "start:q2": "node 2_employee_crud_mongoose.js",
+    "start:q3": "node 3_express_welcome.js",
+    "start:q4": "node 4_express_routes.js",
+    "start:q5": "node 5_express_middleware.js",
+    "start:q6": "node 6_express_static.js",
+    "start:q7": "node 7_student_rest_api_array.js",
+    "start:q8": "node 8_books_rest_api.js",
+    "start:q9": "node 9_mongodb_rest_api.js"
+  },
+  "keywords": [
+    "mean",
+    "express",
+    "mongodb",
+    "mongoose",
+    "nodejs",
+    "rest-api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.3.1"
+  }
+}

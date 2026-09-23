@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Static Files Demo - Express.js</title>
+  <!-- Linked CSS file served by express.static -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="card">
+    <!-- Image file served by express.static -->
+    <img src="/logo.svg" alt="Express Logo" class="logo">
+    <h1>Static Resources Demo</h1>
+    <p>This web page demonstrates serving static files using <code>express.static()</code>.</p>
+    <ul>
+      <li><strong>HTML:</strong> <code>/index.html</code></li>
+      <li><strong>CSS:</strong> <code>/style.css</code></li>
+      <li><strong>Image:</strong> <code>/logo.svg</code></li>
+    </ul>
+    <p class="tagline">Built with Express.js & Node.js</p>
+  </div>
+</body>
+</html>

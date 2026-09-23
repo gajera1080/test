@@ -1,0 +1,57 @@
+/* Static CSS file served via express.static() */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  text-align: center;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  color: #333333;
+  margin-top: 0;
+}
+
+p {
+  color: #555555;
+  line-height: 1.6;
+}
+
+ul {
+  text-align: left;
+  background: #f8f9fa;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  list-style: square;
+}
+
+code {
+  background: #e9ecef;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #d63384;
+}
+
+.tagline {
+  margin-top: 1.5rem;
+  font-weight: bold;
+  color: #667eea;
+}

@@ -1,0 +1,293 @@
+================================================================================
+DATABASE PRACTICAL COMMANDS REFERENCE
+Database Engines: SQLite3 & MongoDB
+Mode: Command Line Interface (CLI) / Shell Based
+================================================================================
+
+This document contains complete, command-line based commands for all 9 database
+tasks. As specified:
+- Items 8, 9, and MongoDB-specific tasks are provided for MongoDB (mongosh / CLI).
+- Items 1 through 7 and full equivalents are provided for SQLite3 CLI.
+- Both interactive shell commands and direct terminal one-liner commands are included.
+
+================================================================================
+TASK 1: CREATE DATABASE AND INSERT RECORDS
+================================================================================
+
+--- [A] SQLite3 (CLI) ---
+# 1. Open / Create SQLite database file from terminal:
+sqlite3 company.db
+
+# 2. Inside the SQLite prompt, create a table:
+CREATE TABLE employees (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    department TEXT NOT NULL,
+    salary REAL NOT NULL,
+    experience INTEGER NOT NULL
+);
+
+# 3. Insert records:
+INSERT INTO employees (name, department, salary, experience) VALUES ('Alice Johnson', 'IT', 75000, 5);
+INSERT INTO employees (name, department, salary, experience) VALUES ('Bob Smith', 'HR', 60000, 3);
+INSERT INTO employees (name, department, salary, experience) VALUES ('Charlie Brown', 'Finance', 80000, 7);
+INSERT INTO employees (name, department, salary, experience) VALUES ('Diana Prince', 'IT', 90000, 8);
+INSERT INTO employees (name, department, salary, experience) VALUES ('Evan Wright', 'Marketing', 55000, 2);
+
+# 4. View inserted records:
+SELECT * FROM employees;
+
+# Direct Terminal One-Liner (without entering prompt):
+sqlite3 company.db "CREATE TABLE IF NOT EXISTS employees (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, department TEXT NOT NULL, salary REAL NOT NULL, experience INTEGER NOT NULL);"
+sqlite3 company.db "INSERT INTO employees (name, department, salary, experience) VALUES ('Alice Johnson', 'IT', 75000, 5);"
+
+
+--- [B] MongoDB (mongosh / CLI) ---
+# 1. Connect to MongoDB and switch to database:
+mongosh
+use companyDB;
+
+# 2. Insert a single document:
+db.employees.insertOne({
+    name: "Alice Johnson",
+    department: "IT",
+    salary: 75000,
+    experience: 5
+});
+
+# 3. Insert multiple documents:
+db.employees.insertMany([
+    { name: "Bob Smith", department: "HR", salary: 60000, experience: 3 },
+    { name: "Charlie Brown", department: "Finance", salary: 80000, experience: 7 },
+    { name: "Diana Prince", department: "IT", salary: 90000, experience: 8 },
+    { name: "Evan Wright", department: "Marketing", salary: 55000, experience: 2 }
+]);
+
+# 4. Direct Terminal One-Liner:
+mongosh companyDB --eval 'db.employees.insertOne({ name: "Frank Miller", department: "Operations", salary: 65000, experience: 4 })'
+
+
+================================================================================
+TASK 2: BACKUP COMPLETE DATABASE (.dump equivalent)
+================================================================================
+
+--- [A] SQLite3 ---
+# Terminal command to dump the entire database (schema + all data) into SQL file:
+sqlite3 company.db .dump > backup_complete.sql
+
+# Alternative inside SQLite prompt:
+sqlite3 company.db
+.output backup_complete.sql
+.dump
+.output stdout
+.exit
+
+--- [B] MongoDB ---
+# Terminal command using mongodump (Complete BSON backup of database):
+mongodump --db=companyDB --out=./mongo_backup/
+
+# Terminal command to dump as a single archive file:
+mongodump --db=companyDB --archive=companyDB_backup.archive --gzip
+
+
+================================================================================
+TASK 3: BACKUP ONLY DATABASE STRUCTURE (SCHEMA ONLY)
+================================================================================
+
+--- [A] SQLite3 ---
+# Terminal command to export only the database structure / DDL:
+sqlite3 company.db .schema > backup_structure.sql
+
+# Alternative inside SQLite prompt:
+sqlite3 company.db
+.output backup_structure.sql
+.schema
+.output stdout
+.exit
+
+--- [B] MongoDB ---
+# MongoDB is document-oriented; to backup collection metadata and schema validators:
+mongosh companyDB --eval "printjson(db.getCollectionInfos())" > mongo_schema_structure.json
+
+# Export index definitions (part of database structure):
+mongosh companyDB --eval "printjson(db.employees.getIndexes())" > employees_indexes.json
+
+
+================================================================================
+TASK 4: BACKUP ONLY DATA
+================================================================================
+
+--- [A] SQLite3 ---
+# Method 1: Export only INSERT statements (Data only) using CLI:
+sqlite3 company.db ".mode insert employees" "SELECT * FROM employees;" > backup_data_only.sql
+
+# Method 2: Export table data to CSV file from CLI:
+sqlite3 -header -csv company.db "SELECT * FROM employees;" > employees_data.csv
+
+# Method 3: Filter .dump to extract only INSERT lines:
+sqlite3 company.db .dump | grep "^INSERT INTO" > backup_inserts_only.sql
+
+--- [B] MongoDB ---
+# Terminal command to export collection data to JSON:
+mongoexport --db=companyDB --collection=employees --out=employees_data.json --pretty
+
+# Terminal command to export collection data to CSV:
+mongoexport --db=companyDB --collection=employees --type=csv --fields=name,department,salary,experience --out=employees_data.csv
+
+
+================================================================================
+TASK 5: RESTORE DATABASE FROM BACKUP
+================================================================================
+
+--- [A] SQLite3 ---
+# Method 1: Terminal redirection into a new or existing database:
+sqlite3 company_restored.db < backup_complete.sql
+
+# Method 2: Inside SQLite prompt using .read command:
+sqlite3 company_restored.db
+.read backup_complete.sql
+.tables
+SELECT * FROM employees;
+.exit
+
+--- [B] MongoDB ---
+# Restore from mongodump directory:
+mongorestore --db=companyDB ./mongo_backup/companyDB/
+
+# Restore from gzip archive:
+mongorestore --archive=companyDB_backup.archive --gzip
+
+# Restore data from JSON file:
+mongoimport --db=companyDB --collection=employees --file=employees_data.json
+
+
+================================================================================
+TASK 6: EXPORT COMPLETE DATABASE TO ANOTHER FILE
+================================================================================
+
+--- [A] SQLite3 ---
+# Method 1: Online backup API via SQLite CLI (.backup command):
+sqlite3 company.db ".backup company_exported.db"
+
+# Method 2: Inside SQLite interactive prompt:
+sqlite3 company.db
+.backup company_exported.db
+.exit
+
+# Method 3: Clone database into another file:
+sqlite3 company.db ".clone company_cloned.db"
+
+--- [B] MongoDB ---
+# Export whole database to an archive file:
+mongodump --db=companyDB --archive=companyDB_exported.archive
+
+# Or clone/restore to a new database name:
+mongorestore --archive=companyDB_exported.archive --nsFrom="companyDB.*" --nsTo="companyDB_copy.*"
+
+
+================================================================================
+TASK 7: DISPLAY ALL TABLES
+================================================================================
+
+--- [A] SQLite3 ---
+# Terminal command to list all tables:
+sqlite3 company.db .tables
+
+# Inside SQLite prompt:
+sqlite3 company.db
+.tables
+
+# Standard SQL query via CLI:
+sqlite3 company.db "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';"
+
+--- [B] MongoDB ---
+# Inside mongosh prompt (Collections = Tables in MongoDB):
+mongosh companyDB
+show collections;
+
+# Or using JavaScript method in mongosh:
+db.getCollectionNames();
+
+# Terminal command execution:
+mongosh companyDB --eval "db.getCollectionNames()"
+
+
+================================================================================
+TASK 8: DISPLAY DATABASE SCHEMA
+================================================================================
+
+--- [A] MongoDB (Primary Requirement: 8 is MongoDB) ---
+# View collection details, storage engine, and validator schema in mongosh:
+mongosh companyDB --eval "printjson(db.getCollectionInfos())"
+
+# View structure / schema of a specific collection (employees):
+mongosh companyDB --eval "printjson(db.getCollectionInfos({ name: 'employees' }))"
+
+# View sample document to inspect dynamic schema/fields:
+mongosh companyDB --eval "printjson(db.employees.findOne())"
+
+# View indexes schema for collection:
+mongosh companyDB --eval "printjson(db.employees.getIndexes())"
+
+--- [B] SQLite3 Equivalent ---
+# Terminal command to display complete database schema:
+sqlite3 company.db .schema
+
+# Display schema for a specific table:
+sqlite3 company.db ".schema employees"
+
+# Display column details (column name, type, nullability, primary key):
+sqlite3 company.db "PRAGMA table_info(employees);"
+
+
+================================================================================
+TASK 9: COUNT TOTAL RECORDS
+================================================================================
+
+--- [A] MongoDB (Primary Requirement: 9 is MongoDB) ---
+# Count total documents in employees collection via mongosh:
+mongosh companyDB --eval "db.employees.countDocuments()"
+
+# Using estimated document count (fast metadata check):
+mongosh companyDB --eval "db.employees.estimatedDocumentCount()"
+
+# Count documents matching a condition (e.g. IT department):
+mongosh companyDB --eval "db.employees.countDocuments({ department: 'IT' })"
+
+# Inside interactive mongosh:
+use companyDB;
+db.employees.countDocuments();
+
+--- [B] SQLite3 Equivalent ---
+# Terminal command to count all records in table:
+sqlite3 company.db "SELECT COUNT(*) AS total_records FROM employees;"
+
+# Inside SQLite prompt:
+SELECT COUNT(*) FROM employees;
+
+# Count by condition:
+sqlite3 company.db "SELECT COUNT(*) FROM employees WHERE department='IT';"
+
+
+================================================================================
+SECTION 20: MONGODB ADVANCED COMMANDS & CHEATSHEET
+================================================================================
+
+# 1. Show all databases:
+mongosh --eval "show dbs"
+
+# 2. Database statistics:
+mongosh companyDB --eval "printjson(db.stats())"
+
+# 3. Collection statistics:
+mongosh companyDB --eval "printjson(db.employees.stats())"
+
+# 4. Aggregation pipeline example (group by department and calculate avg salary):
+mongosh companyDB --eval 'printjson(db.employees.aggregate([
+    { $group: { _id: "$department", totalStaff: { $sum: 1 }, avgSalary: { $avg: "$salary" } } }
+]).toArray())'
+
+# 5. Drop collection / database:
+# db.employees.drop();
+# db.dropDatabase();
+================================================================================
