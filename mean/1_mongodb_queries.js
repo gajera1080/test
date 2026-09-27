@@ -1,6 +1,8 @@
 // 1. Create database and collection, insert 5 students
 use schoolDB;
 
+db.createCollection("students") 
+
 db.students.insertMany([
   { name: "John", age: 15, grade: "B" },
   { name: "Sarah", age: 14, grade: "A" },
