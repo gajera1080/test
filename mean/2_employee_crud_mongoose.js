@@ -1,67 +1,47 @@
-const mongoose = require('mongoose');
-const readline = require('readline');
+const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost:27017/companyDB');
+async function connectDB() {
+    await mongoose.connect("mongodb://localhost:27017/companyDB");
+    console.log("MongoDB connected");
+}
 
-const employeeSchema = new mongoose.Schema({
+const Employee = mongoose.model("Employee", {
     name: String,
     department: String,
     salary: Number,
     experience: Number
 });
 
-const Employee = mongoose.model('Employee', employeeSchema);
+async function CRUD() {
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-async function crud() {
-    console.log('\n1. Create');
-    console.log('2. Read');
-    console.log('3. Update');
-    console.log('4. Delete');
-
-    rl.question('Enter your choice: ', async (choice) => {
-
-        switch (choice) {
-
-            case '1':
-                await Employee.create({
-                    name: 'John',
-                    department: 'IT',
-                    salary: 50000,
-                    experience: 2
-                });
-                console.log('Employee inserted');
-                break;
-
-            case '2':
-                let data = await Employee.find();
-                console.log(data);
-                break;
-
-            case '3':
-                await Employee.updateOne(
-                    { name: 'John' },
-                    { $set: { salary: 60000 } }
-                );
-                console.log('Employee updated');
-                break;
-
-            case '4':
-                await Employee.deleteOne({ name: 'John' });
-                console.log('Employee deleted');
-                break;
-
-            default:
-                console.log('Invalid choice');
-        }
-
-        rl.close();
-        mongoose.connection.close();
+    // Create
+    await Employee.create({
+        name: "John",
+        department: "IT",
+        salary: 50000,
+        experience: 2
     });
+    console.log("Employee inserted");
+
+    // Read
+    const data = await Employee.find();
+    console.log(data);
+
+    // Update
+    await Employee.updateOne(
+        { name: "John" },
+        { salary: 60000 }
+    );
+    console.log("Employee updated");
+
+    // Delete
+    await Employee.deleteOne({ name: "John" });
+    console.log("Employee deleted");
 }
 
-crud();
+async function main() {
+    await connectDB();
+    await CRUD();
+}
+
+main();
