@@ -1,18 +1,56 @@
-const express = require("express");
-const mongoose = require("mongoose");
+const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
+
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/shopDB");
+// Connect MongoDB
+mongoose.connect('mongodb://localhost:27017/schoolDB')
+    .then(() => console.log('MongoDB Connected'));
 
-const Item = mongoose.model("Item", { name: String, price: Number });
+// Schema
+const studentSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    grade: String
+});
 
-// RESTful CRUD API Endpoints
-app.get("/items", async (req, res) => res.json(await Item.find()));
-app.get("/items/:id", async (req, res) => res.json(await Item.findById(req.params.id)));
-app.post("/items", async (req, res) => res.json(await Item.create(req.body)));
-app.put("/items/:id", async (req, res) => res.json(await Item.findByIdAndUpdate(req.params.id, req.body, { new: true })));
-app.delete("/items/:id", async (req, res) => res.json(await Item.findByIdAndDelete(req.params.id)));
+// Model
+const Student = mongoose.model('Student', studentSchema);
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+// GET
+app.get('/students', async (req, res) => {
+    const students = await Student.find();
+    res.json(students);
+});
+
+// POST
+app.post('/students', async (req, res) => {
+    const student = await Student.create(req.body);
+    res.json(student);
+});
+
+// PUT
+app.put('/students/:id', async (req, res) => {
+    const student = await Student.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true }
+    );
+
+    res.json(student);
+});
+
+// DELETE
+app.delete('/students/:id', async (req, res) => {
+    await Student.findByIdAndDelete(req.params.id);
+
+    res.json({
+        message: 'Student deleted'
+    });
+});
+
+app.listen(3000, () => {
+    console.log('Server is listening at http://localhost:3000');
+});

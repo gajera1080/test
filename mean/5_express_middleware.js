@@ -1,17 +1,24 @@
-const express = require("express");
+const express = require('express');
+
 const app = express();
 
-// Parse JSON input
+// Middleware
+app.use((req, res, next) => {
+    console.log('Method:', req.method);
+    console.log('URL:', req.url);
+    console.log('Time:', new Date());
+
+    next();
+});
+
+// JSON middleware
 app.use(express.json());
 
-// Logger middleware
-app.use((req, res, next) => {
-  console.log(`[${new Date().toLocaleTimeString()}] ${req.method} ${req.url}`);
-  next();
+app.post('/student', (req, res) => {
+    console.log(req.body);
+    res.send('Data received');
 });
 
-app.post("/data", (req, res) => {
-  res.json({ message: "Data received", data: req.body });
+app.listen(3000, () => {
+    console.log('Server running at http://localhost:3000');
 });
-
-app.listen(3000, () => console.log("Server running on port 3000"));

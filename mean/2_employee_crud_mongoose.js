@@ -1,34 +1,52 @@
-const mongoose = require("mongoose");
+const express = require('express');
+const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://127.0.0.1:27017/companyDB");
+const app = express();
+
+app.use(express.json());
+
+mongoose.connect('mongodb://localhost:27017/companyDB')
+    .then(() => console.log('MongoDB Connected'));
 
 // Schema
 const employeeSchema = new mongoose.Schema({
-  name: String,
-  department: String,
-  salary: Number,
-  experience: Number
+    name: String,
+    department: String,
+    salary: Number,
+    experience: Number
 });
 
-const Employee = mongoose.model("Employee", employeeSchema);
+const Employee = mongoose.model('Employee', employeeSchema);
 
-async function crud() {
-  // CREATE
-  const emp = await Employee.create({ name: "Alice", department: "IT", salary: 70000, experience: 3 });
-  console.log("Created:", emp);
+// CREATE
+app.post('/employees', async (req, res) => {
+    const employee = await Employee.create(req.body);
+    res.json(employee);
+});
 
-  // READ
-  console.log("All Employees:", await Employee.find());
+// READ
+app.get('/employees', async (req, res) => {
+    const employees = await Employee.find();
+    res.json(employees);
+});
 
-  // UPDATE
-  await Employee.updateOne({ name: "Alice" }, { salary: 75000 });
-  console.log("Updated:", await Employee.findOne({ name: "Alice" }));
+// UPDATE
+app.put('/employees/:id', async (req, res) => {
+    const employee = await Employee.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true }
+    );
 
-  // DELETE
-  await Employee.deleteOne({ name: "Alice" });
-  console.log("Deleted. Remaining:", await Employee.find());
+    res.json(employee);
+});
 
-  mongoose.disconnect();
-}
+// DELETE
+app.delete('/employees/:id', async (req, res) => {
+    await Employee.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Employee deleted' });
+});
 
-crud();
+app.listen(3000, () => {
+    console.log('Server is listening at http://localhost:3000');
+});

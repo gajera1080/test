@@ -1,8 +1,19 @@
-const express = require("express");
+const express = require('express');
+
 const app = express();
 
-app.get("/", (req, res) => res.send("Home Page"));
-app.get("/about", (req, res) => res.send("About Page"));
-app.get("/contact", (req, res) => res.send("Contact Page"));
+app.get('/', (req, res) => {
+    res.send('Welcome to Home Page');
+});
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+app.get('/about', (req, res) => {
+    res.send('About Us');
+});
+
+app.get('/contact', (req, res) => {
+    res.send('Contact Us');
+});
+
+app.listen(3000, () => {
+    console.log('Server is listening at http://localhost:3000');
+});
