@@ -1,0 +1,48 @@
+POWER BI - UNIT 1 & UNIT 2 DAX QUERIES
+
+Table Name:
+'Table 1 (Sheet1)'
+
+1. Total Marks
+Total Marks = SUM('Table 1 (Sheet1)'[Marks])
+
+2. Average Marks
+Average Marks = AVERAGE('Table 1 (Sheet1)'[Marks])
+
+3. Maximum Marks
+Maximum Marks = MAX('Table 1 (Sheet1)'[Marks])
+
+4. Minimum Marks
+Minimum Marks = MIN('Table 1 (Sheet1)'[Marks])
+
+5. Student Count
+Student Count = COUNTROWS('Table 1 (Sheet1)')
+
+6. Computer Science Students
+CS Students =
+CALCULATE(
+    COUNTROWS('Table 1 (Sheet1)'),
+    'Table 1 (Sheet1)'[Course] = "Computer Science"
+)
+
+7. CS Average Marks
+CS Average Marks =
+CALCULATE(
+    AVERAGE('Table 1 (Sheet1)'[Marks]),
+    'Table 1 (Sheet1)'[Course] = "Computer Science"
+)
+
+8. Pass Students
+Pass Students =
+CALCULATE(
+    COUNTROWS('Table 1 (Sheet1)'),
+    'Table 1 (Sheet1)'[Marks] >= 40
+)
+
+9. Highest Student Marks
+Highest Marks = MAX('Table 1 (Sheet1)'[Marks])
+
+10. Total Students
+Total Students = COUNT('Table 1 (Sheet1)'[ID])
+
+N
