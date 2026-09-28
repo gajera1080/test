@@ -25,6 +25,11 @@ app.get('/students', async (req, res) => {
     res.json(students);
 });
 
+// GET by Id
+app.get('/students/:id', async (req, res) => {
+    const students = await User.findById(req.params.id);  
+    res.json(students);
+    
 // POST
 app.post('/students', async (req, res) => {
     const student = await Student.create(req.body);
