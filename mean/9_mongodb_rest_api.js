@@ -27,7 +27,7 @@ app.get('/students', async (req, res) => {
 
 // GET by Id
 app.get('/students/:id', async (req, res) => {
-    const students = await User.findById(req.params.id);  
+    const students = await Student.findById(req.params.id);  
     res.json(students);
 });
     
