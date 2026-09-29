@@ -1,0 +1,39 @@
+╔══════════════════════════════════════════════════╗
+║       POWER QUERY IF/ELSE CHEAT SHEET            ║
+╠══════════════════════════════════════════════════╣
+║                                                  ║
+║ Basic:                                           ║
+║ if [A] = "Yes" then "Y" else "N"                 ║
+║                                                  ║
+║ Number:                                          ║
+║ if [Sales] > 50000 then "High" else "Low"        ║
+║                                                  ║
+║ Blank:                                           ║
+║ if [A] = null then [B] else [A]                  ║
+║                                                  ║
+║ Empty text:                                      ║
+║ if [A] = "" then [B] else [A]                    ║
+║                                                  ║
+║ Multiple:                                        ║
+║ if condition1 then result1                       ║
+║ else if condition2 then result2                  ║
+║ else result3                                     ║
+║                                                  ║
+║ AND:                                             ║
+║ if A and B then X else Y                         ║
+║                                                  ║
+║ OR:                                              ║
+║ if A or B then X else Y                          ║
+║                                                  ║
+║ NOT:                                             ║
+║ if not A then X else Y                           ║
+║                                                  ║
+║ Equal:        =                                  ║
+║ Not equal:    <>                                 ║
+║ Greater:      >                                  ║
+║ Less:         <                                  ║
+║ Greater/equal >=                                 ║
+║ Less/equal    <=                                 ║
+║                                                  ║
+║ each = apply expression to each row              ║
+╚══════════════════════════════════════════════════╝
