@@ -24,12 +24,8 @@ test/
 │   │   ├── shopping-data.csv
 │   │   └── titanic.csv
 │   │
-│   ├── preprocessing/                                    # Data Preprocessing & Cleaning Addons
-│   │   ├── 01_missing_values.py                          # Handling Nulls (Drop, Pandas fillna, SimpleImputer)
-│   │   ├── 02_categorical_encoding.py                   # Categorical to Numeric (LabelEncoder, get_dummies, OHE)
-│   │   ├── 03_feature_scaling.py                         # Standardization (StandardScaler) & Normalization (MinMaxScaler)
-│   │   ├── 04_outlier_detection.py                       # IQR Outlier Detection & Trimming
-│   │   └── 05_complete_preprocessing_pipeline.py         # End-to-end ColumnTransformer & Pipeline
+│   ├── preprocessing/                                    # Surface-Level Data Manipulation Addon
+│   │   └── basic_manipulation.py                         # Null handling & String-to-Numeric LabelEncoder (fit_transform)
 │   │
 │   ├── 01_split_iris_dataset.py                          # Q1: Split Iris dataset
 │   ├── 02_simple_linear_regression_diabetes.py           # Q2: SLR on Diabetes (MSE & R2)
@@ -81,25 +77,16 @@ test/
 
 ---
 
-## 🛠️ Data Preprocessing Addons (`ml/preprocessing/`)
+## 🛠️ Surface-Level Data Manipulation Addon (`ml/preprocessing/`)
 
-Dedicated standalone scripts for exam preparation covering data cleaning, encoding, scaling, and pipelines:
+A single, clean, 20-line exam-ready script covering the core essential manipulation tasks:
+- **Checking Null Values**: `df.isnull().sum()`
+- **Removing / Filling Nulls**: `df.dropna()` or `df['col'].fillna(df['col'].mean())`
+- **Converting String Categories to Numeric**: Labeling with Scikit-Learn `LabelEncoder().fit_transform()`
 
-| Topic | Script Name | Techniques Demonstrated |
-| :--- | :--- | :--- |
-| **Missing Values** | `ml/preprocessing/01_missing_values.py` | `isnull().sum()`, `dropna()`, Pandas `fillna()` (mean/median/mode), Scikit-Learn `SimpleImputer` |
-| **Categorical to Numeric** | `ml/preprocessing/02_categorical_encoding.py` | `LabelEncoder`, Ordinal dictionary `.map()`, `pd.get_dummies()`, `OneHotEncoder` |
-| **Feature Scaling** | `ml/preprocessing/03_feature_scaling.py` | `StandardScaler` (Z-score: mean=0, std=1), `MinMaxScaler` (Range 0 to 1) |
-| **Outlier Detection** | `ml/preprocessing/04_outlier_detection.py` | IQR Method ($Q_1, Q_3, \text{IQR}$), Upper/Lower boundaries, trimming outliers |
-| **Full Pipeline** | `ml/preprocessing/05_complete_preprocessing_pipeline.py` | `ColumnTransformer` + `Pipeline` combining imputation + encoding + scaling |
-
-Run any preprocessing script:
+Run the script:
 ```bash
-python ml/preprocessing/01_missing_values.py
-python ml/preprocessing/02_categorical_encoding.py
-python ml/preprocessing/03_feature_scaling.py
-python ml/preprocessing/04_outlier_detection.py
-python ml/preprocessing/05_complete_preprocessing_pipeline.py
+python ml/preprocessing/basic_manipulation.py
 ```
 
 ---
