@@ -24,6 +24,13 @@ test/
 │   │   ├── shopping-data.csv
 │   │   └── titanic.csv
 │   │
+│   ├── preprocessing/                                    # Data Preprocessing & Cleaning Addons
+│   │   ├── 01_missing_values.py                          # Handling Nulls (Drop, Pandas fillna, SimpleImputer)
+│   │   ├── 02_categorical_encoding.py                   # Categorical to Numeric (LabelEncoder, get_dummies, OHE)
+│   │   ├── 03_feature_scaling.py                         # Standardization (StandardScaler) & Normalization (MinMaxScaler)
+│   │   ├── 04_outlier_detection.py                       # IQR Outlier Detection & Trimming
+│   │   └── 05_complete_preprocessing_pipeline.py         # End-to-end ColumnTransformer & Pipeline
+│   │
 │   ├── 01_split_iris_dataset.py                          # Q1: Split Iris dataset
 │   ├── 02_simple_linear_regression_diabetes.py           # Q2: SLR on Diabetes (MSE & R2)
 │   ├── 03_linear_regression_predictions.py               # Q3: 6 Bivariate Predictions
@@ -71,6 +78,29 @@ test/
 | **B8** | K-Means Clustering on people (Age and Income) using `people.csv`. | `ml/16_kmeans_people.py` | `data/people.csv` |
 | **B9** | K-Means on Iris using Petal Length and Width (scaling analysis & elbow plot for optimal K). | `ml/17_kmeans_iris_elbow.py` | Scikit-learn Iris |
 | **B10** | Agglomerative Hierarchical Clustering on shopping data (dendrogram and scatter plot). | `ml/18_hierarchical_clustering_shopping.py` | `data/shopping-data.csv` |
+
+---
+
+## 🛠️ Data Preprocessing Addons (`ml/preprocessing/`)
+
+Dedicated standalone scripts for exam preparation covering data cleaning, encoding, scaling, and pipelines:
+
+| Topic | Script Name | Techniques Demonstrated |
+| :--- | :--- | :--- |
+| **Missing Values** | `ml/preprocessing/01_missing_values.py` | `isnull().sum()`, `dropna()`, Pandas `fillna()` (mean/median/mode), Scikit-Learn `SimpleImputer` |
+| **Categorical to Numeric** | `ml/preprocessing/02_categorical_encoding.py` | `LabelEncoder`, Ordinal dictionary `.map()`, `pd.get_dummies()`, `OneHotEncoder` |
+| **Feature Scaling** | `ml/preprocessing/03_feature_scaling.py` | `StandardScaler` (Z-score: mean=0, std=1), `MinMaxScaler` (Range 0 to 1) |
+| **Outlier Detection** | `ml/preprocessing/04_outlier_detection.py` | IQR Method ($Q_1, Q_3, \text{IQR}$), Upper/Lower boundaries, trimming outliers |
+| **Full Pipeline** | `ml/preprocessing/05_complete_preprocessing_pipeline.py` | `ColumnTransformer` + `Pipeline` combining imputation + encoding + scaling |
+
+Run any preprocessing script:
+```bash
+python ml/preprocessing/01_missing_values.py
+python ml/preprocessing/02_categorical_encoding.py
+python ml/preprocessing/03_feature_scaling.py
+python ml/preprocessing/04_outlier_detection.py
+python ml/preprocessing/05_complete_preprocessing_pipeline.py
+```
 
 ---
 
