@@ -3,26 +3,24 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import MinMaxScaler
 
-# 1. Load Data
+# 1. Load Dataset
 df = pd.read_csv("data/people.csv")
-X = df[["Age", "Income"]]
+x = df[["Age", "Income"]]
 
-# 2. Preprocess with Scaling (Age & Income have different scales)
+# 2. Apply Feature Scaling
 scaler = MinMaxScaler()
-X_scaled = scaler.fit_transform(X)
+x_scaled = scaler.fit_transform(x)
 
-# 3. Apply K-Means (K = 3)
-kmeans = KMeans(n_clusters=3, random_state=42)
-df["Cluster"] = kmeans.fit_predict(X_scaled)
-print("Clustered People:\n", df[["Name", "Age", "Income", "Cluster"]])
+# 3. Apply K-Means Clustering
+model = KMeans(n_clusters=3, random_state=42, n_init=10)
+df["Cluster"] = model.fit_predict(x_scaled)
+print(df[["Name", "Age", "Income", "Cluster"]])
 
 # 4. Visualization
-centroids = scaler.inverse_transform(kmeans.cluster_centers_)
-plt.scatter(df["Age"], df["Income"], c=df["Cluster"], cmap="rainbow", s=60)
-plt.scatter(centroids[:, 0], centroids[:, 1], color="black", marker="X", s=200, label="Centroids")
+centroids = scaler.inverse_transform(model.cluster_centers_)
+plt.scatter(df["Age"], df["Income"], c=df["Cluster"], cmap="rainbow")
+plt.scatter(centroids[:, 0], centroids[:, 1], color="black", marker="X")
 plt.xlabel("Age")
 plt.ylabel("Income")
-plt.title("K-Means Clustering on People Dataset")
-plt.legend()
-plt.savefig("16_kmeans_people.png")
+plt.title("K-Means Clustering - People")
 plt.show()

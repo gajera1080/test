@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 
-# 6 Pairs: (Title, X_values, y_values, new_x_to_predict)
+# 1. Create Datasets
 cases = [
     ("Age vs Height", [2, 4, 6, 8, 10], [85, 105, 115, 130, 140], 5),
     ("Standard vs Percentage", [1, 2, 3, 4, 5], [90, 85, 80, 75, 70], 6),
@@ -12,19 +12,22 @@ cases = [
     ("Vehicle Age vs Price", [1, 2, 3, 4, 5], [20, 17, 14, 11, 8], 3)
 ]
 
+# 2. Train, Predict and Visualize
 plt.figure(figsize=(12, 8))
 for i, (title, x, y, new_x) in enumerate(cases, 1):
-    X = np.array(x).reshape(-1, 1)
-    model = LinearRegression().fit(X, y)
-    pred_y = model.predict([[new_x]])[0]
-    print(f"{i}. {title}: For X={new_x} -> Predicted Y={pred_y:.2f}")
+    x = np.array(x).reshape(-1, 1)
+
+    model = LinearRegression()
+    model.fit(x, y)
+
+    y_pred = model.predict([[new_x]])
+    print(title, "Prediction:", y_pred[0])
 
     plt.subplot(2, 3, i)
     plt.scatter(x, y, color="blue")
-    plt.plot(x, model.predict(X), color="red")
-    plt.scatter([new_x], [pred_y], color="green", s=80, marker="*")
+    plt.plot(x, model.predict(x), color="red")
+    plt.scatter([new_x], y_pred, color="green", marker="*")
     plt.title(title)
 
 plt.tight_layout()
-plt.savefig("03_linear_regression_6_cases.png")
 plt.show()

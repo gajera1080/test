@@ -5,28 +5,29 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.metrics import mean_squared_error, r2_score
 
-# 1. Load Data
+# 1. Load Dataset
 df = pd.read_csv("data/auto.csv")
-X = df[["horsepower"]]
+df = df.sort_values("horsepower")
+x = df[["horsepower"]]
 y = df["mpg"]
 
-# 2. Fit Polynomial Features (Degree = 2)
+# 2. Convert X into Polynomial Features
 poly = PolynomialFeatures(degree=2)
-X_poly = poly.fit_transform(X)
-model = LinearRegression().fit(X_poly, y)
+x_poly = poly.fit_transform(x)
 
-# 3. Accuracy Metrics (R2 and MSE)
-y_pred = model.predict(X_poly)
-print("Mean Squared Error (MSE):", mean_squared_error(y, y_pred))
+# 3. Train Model
+model = LinearRegression()
+model.fit(x_poly, y)
+
+# 4. Predict and Evaluate
+y_pred = model.predict(x_poly)
+print("Mean Squared Error:", mean_squared_error(y, y_pred))
 print("R2 Score:", r2_score(y, y_pred))
 
-# 4. Visualization
-X_plot = np.linspace(float(X["horsepower"].min()), float(X["horsepower"].max()), 100).reshape(-1, 1)
-plt.scatter(X, y, color="blue", label="Actual Data")
-plt.plot(X_plot, model.predict(poly.transform(X_plot)), color="red", label="Polynomial Fit (deg 2)")
+# 5. Visualization
+plt.scatter(x, y, color="blue")
+plt.plot(x, y_pred, color="red")
 plt.xlabel("Horsepower")
 plt.ylabel("MPG")
-plt.title("Auto Dataset - Polynomial Regression")
-plt.legend()
-plt.savefig("09_auto_poly.png")
+plt.title("Polynomial Regression - Auto Dataset")
 plt.show()

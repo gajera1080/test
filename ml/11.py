@@ -1,30 +1,36 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
 from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
 
-# 1. Load Data
+# 1. Load Dataset
 df = pd.read_csv("data/heart.csv")
-X = df.drop("target", axis=1)
+x = df.drop(columns="target")
 y = df["target"]
 
-# 2. Scale Features & Train Model
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# 2. Split Dataset
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.2, random_state=42
+)
+
+# 3. Apply Feature Scaling
 scaler = StandardScaler()
-X_train_s = scaler.fit_transform(X_train)
-X_test_s = scaler.transform(X_test)
+x_train = scaler.fit_transform(x_train)
+x_test = scaler.transform(x_test)
 
-model = LogisticRegression().fit(X_train_s, y_train)
+# 4. Train Model
+model = LogisticRegression(max_iter=1000)
+model.fit(x_train, y_train)
 
-# 3. Predict & Print Metrics
-y_pred = model.predict(X_test_s)
+# 5. Predict and Check Accuracy
+y_pred = model.predict(x_test)
 print("Accuracy:", accuracy_score(y_test, y_pred))
-print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("Confusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
 
-# 4. Visualization (Confusion Matrix Display)
-ConfusionMatrixDisplay.from_estimator(model, X_test_s, y_test, cmap="Blues")
-plt.title("Heart Disease - Logistic Regression Confusion Matrix")
-plt.savefig("11_heart_logistic.png")
+# 6. Visualization
+ConfusionMatrixDisplay.from_predictions(y_test, y_pred)
+plt.title("Heart Disease - Logistic Regression")
 plt.show()
