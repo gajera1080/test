@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="dirApp">
+<head>
+  <title>Custom Directives: user-card &amp; student-card</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="MainCtrl" style="font-family: Arial; padding: 20px;">
+  <!-- Consolidates Journal Questions 8 and 9 -->
+  <h2>AngularJS Custom Directives</h2>
+
+  <!-- Q8: Custom user-card directive -->
+  <h3>1. User Card Directive</h3>
+  <user-card></user-card>
+
+  <hr>
+
+  <!-- Q9: Reusable student-card directive with = and & -->
+  <h3>2. Reusable Student Card Directive</h3>
+  <student-card info="student1" on-view="viewDetails(student1)"></student-card>
+  <br>
+  <student-card info="student2" on-view="viewDetails(student2)"></student-card>
+
+  <script>
+    angular.module("dirApp", [])
+      .controller("MainCtrl", function($scope) {
+        $scope.user = {
+          name: "Alice Johnson",
+          email: "alice@example.com",
+          image: "https://via.placeholder.com/80"
+        };
+
+        $scope.student1 = { name: "Bob Smith", course: "IT", marks: 75 };
+        $scope.student2 = { name: "David Lee", course: "CS", marks: 32 };
+
+        $scope.viewDetails = function(s) {
+          alert("Student: " + s.name + "\nCourse: " + s.course + "\nMarks: " + s.marks);
+        };
+      })
+      // Q8 Directive
+      .directive("userCard", function() {
+        return {
+          restrict: "E",
+          template: `
+            <div style="border: 2px solid #333; padding: 12px; width: 220px; border-radius: 6px;">
+              <img ng-src="{{user.image}}" alt="avatar" style="border-radius: 50%;"><br>
+              <b>{{ user.name }}</b>
+              <p>{{ user.email }}</p>
+            </div>
+          `
+        };
+      })
+      // Q9 Directive with Isolated Scope (= for data, & for method)
+      .directive("studentCard", function() {
+        return {
+          restrict: "E",
+          scope: {
+            info: "=",
+            onView: "&"
+          },
+          template: `
+            <div style="border: 1px solid #777; padding: 10px; width: 240px; border-radius: 6px;">
+              <h4>{{ info.name }} ({{ info.course }})</h4>
+              <p>Marks: {{ info.marks }} -
+                <b ng-style="{color: info.marks >= 40 ? 'green' : 'red'}">
+                  {{ info.marks >= 40 ? 'PASS' : 'FAIL' }}
+                </b>
+              </p>
+              <button ng-click="onView()">View Details</button>
+            </div>
+          `
+        };
+      });
+  </script>
+</body>
+</html>

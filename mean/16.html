@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+  <title>AngularJS Task Manager</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .done { text-decoration: line-through; color: gray; }
+  </style>
+</head>
+<body ng-controller="TodoCtrl">
+  <!-- Journal Question 11: Task Manager (To-Do App) -->
+  <h2>Task Manager (To-Do App)</h2>
+
+  <!-- 1. Add Task -->
+  <input type="text" ng-model="newTask" placeholder="Enter task title...">
+  <button ng-click="addTask()">Add Task</button>
+
+  <h3>All Tasks:</h3>
+  <!-- 2. View Tasks -->
+  <ul>
+    <li ng-repeat="task in tasks" style="margin: 6px 0;">
+      <!-- 3. Mark as Completed -->
+      <input type="checkbox" ng-model="task.completed">
+      <span ng-class="{done: task.completed}">{{ task.title }}</span>
+      <!-- 4. Delete Task -->
+      <button ng-click="deleteTask($index)" style="color:red; margin-left:10px;">Delete</button>
+    </li>
+  </ul>
+
+  <script>
+    angular.module("todoApp", []).controller("TodoCtrl", function($scope) {
+      $scope.tasks = [
+        { title: "Study MEAN Architecture", completed: true },
+        { title: "Review MongoDB Queries", completed: false }
+      ];
+
+      $scope.addTask = function() {
+        if ($scope.newTask) {
+          $scope.tasks.push({ title: $scope.newTask, completed: false });
+          $scope.newTask = "";
+        }
+      };
+
+      $scope.deleteTask = function(index) {
+        $scope.tasks.splice(index, 1);
+      };
+    });
+  </script>
+</body>
+</html>

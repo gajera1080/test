@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="formApp">
+<head>
+  <title>AngularJS Form Validation</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .error { color: red; font-size: 13px; }
+  </style>
+</head>
+<body ng-controller="FormCtrl">
+  <!-- Journal Question 10: Form Validation -->
+  <h2>User Registration with Form Validation</h2>
+
+  <form name="regForm" ng-submit="submitForm()" novalidate>
+    <!-- Name -->
+    <label>Name:</label><br>
+    <input type="text" name="uName" ng-model="user.name" required ng-minlength="3"><br>
+    <span class="error" ng-show="regForm.uName.$dirty && regForm.uName.$error.required">Name is required.</span>
+    <span class="error" ng-show="regForm.uName.$dirty && regForm.uName.$error.minlength">Minimum 3 characters required.</span>
+    <br><br>
+
+    <!-- Email -->
+    <label>Email:</label><br>
+    <input type="email" name="uEmail" ng-model="user.email" required><br>
+    <span class="error" ng-show="regForm.uEmail.$dirty && regForm.uEmail.$error.required">Email is required.</span>
+    <span class="error" ng-show="regForm.uEmail.$dirty && regForm.uEmail.$error.email">Invalid email format.</span>
+    <br><br>
+
+    <!-- Age -->
+    <label>Age (18-60):</label><br>
+    <input type="number" name="uAge" ng-model="user.age" required min="18" max="60"><br>
+    <span class="error" ng-show="regForm.uAge.$dirty && (regForm.uAge.$error.min || regForm.uAge.$error.max)">Age must be between 18 and 60.</span>
+    <br><br>
+
+    <!-- Submit (Disabled until valid) -->
+    <button type="submit" ng-disabled="regForm.$invalid">Register</button>
+  </form>
+
+  <!-- Welcome on Successful Submission -->
+  <div ng-show="submitted" style="margin-top: 15px; background: #d4edda; padding: 12px; width: 300px; border-radius: 6px;">
+    <h3>Registration Successful!</h3>
+    <p>Welcome, <b>{{ user.name }}</b></p>
+    <p>Email: {{ user.email }} | Age: {{ user.age }}</p>
+  </div>
+
+  <script>
+    angular.module("formApp", []).controller("FormCtrl", function($scope) {
+      $scope.user = {};
+      $scope.submitted = false;
+      $scope.submitForm = function() {
+        $scope.submitted = true;
+      };
+    });
+  </script>
+</body>
+</html>

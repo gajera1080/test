@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="">
+<head>
+  <title>AngularJS String Expressions &amp; Profile</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body style="font-family: Arial; padding: 20px;">
+  <!-- Consolidates Journal Questions 1, 3, and 6 -->
+  <h2>AngularJS Expressions &amp; Data Binding</h2>
+
+  First Name: <input type="text" ng-model="firstName" placeholder="First"><br><br>
+  Last Name : <input type="text" ng-model="lastName" placeholder="Last"><br><br>
+  Age       : <input type="number" ng-model="age" placeholder="Age"><br><br>
+  City      : <input type="text" ng-model="city" placeholder="City"><br><br>
+
+  <!-- Q1 & Q3: Welcome & Full Name Expressions -->
+  <h3 ng-show="firstName || lastName">Welcome, {{ firstName + " " + lastName }}!</h3>
+
+  <!-- Q6: Profile Message -->
+  <div ng-show="firstName && age && city" style="background:#eef; padding:12px; width:340px; border-radius:6px;">
+    <b>Profile Summary:</b>
+    <p>Hello! I am {{ firstName + " " + lastName }}, {{ age }} years old, living in {{ city }}.</p>
+  </div>
+</body>
+</html>

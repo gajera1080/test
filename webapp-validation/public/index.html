@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eventApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event Management System (With Form Validation)</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <script src="angular.min.js"></script>
+  <style>
+    input.ng-invalid.ng-dirty { border-color: #dc3545; background-color: #fff8f8; }
+    input.ng-valid.ng-dirty { border-color: #198754; }
+  </style>
+</head>
+<body class="bg-light" ng-controller="EventController">
+<div class="container py-4">
+
+  <h2 class="mb-2">🎟️ Event Management System <span class="badge bg-info text-dark">Form Validation</span></h2>
+  <p class="text-muted mb-4">Practical 14: MongoDB + ExpressJS + AngularJS with Client-Side Form Validation.</p>
+
+  <!-- Status Alert Banner -->
+  <div class="alert alert-success" ng-if="message">{{ message }}</div>
+  <div class="alert alert-danger" ng-if="errorMessage">{{ errorMessage }}</div>
+
+  <!-- Form with AngularJS Validation -->
+  <div class="card card-body mb-4">
+    <h4>{{ isEditing ? 'Edit Event' : 'Add New Event' }}</h4>
+    <form name="eventForm" class="row g-3" ng-submit="saveEvent()" novalidate>
+      
+      <!-- Event ID -->
+      <div class="col-md-6">
+        <label class="form-label fw-bold">Event ID *</label>
+        <input type="text" name="eventId" class="form-control" ng-model="form.eventId" placeholder="e.g. EVT101" required ng-disabled="isEditing">
+        <div class="text-danger small mt-1 fw-bold" ng-show="eventForm.eventId.$dirty && eventForm.eventId.$invalid">
+          Event ID is required.
+        </div>
+      </div>
+
+      <!-- Title -->
+      <div class="col-md-6">
+        <label class="form-label fw-bold">Event Title * (min 3 characters)</label>
+        <input type="text" name="title" class="form-control" ng-model="form.title" placeholder="e.g. Tech Symposium 2026" required ng-minlength="3">
+        <div class="text-danger small mt-1 fw-bold" ng-show="eventForm.title.$dirty && eventForm.title.$invalid">
+          <span ng-show="eventForm.title.$error.required">Title is required.</span>
+          <span ng-show="eventForm.title.$error.minlength">Title must be at least 3 characters.</span>
+        </div>
+      </div>
+
+      <!-- Venue -->
+      <div class="col-md-6">
+        <label class="form-label fw-bold">Venue *</label>
+        <input type="text" name="venue" class="form-control" ng-model="form.venue" placeholder="e.g. Auditorium Hall A" required>
+        <div class="text-danger small mt-1 fw-bold" ng-show="eventForm.venue.$dirty && eventForm.venue.$invalid">
+          Venue is required.
+        </div>
+      </div>
+
+      <!-- Date -->
+      <div class="col-md-6">
+        <label class="form-label fw-bold">Date *</label>
+        <input type="date" name="date" class="form-control" ng-model="form.date" required>
+        <div class="text-danger small mt-1 fw-bold" ng-show="eventForm.date.$dirty && eventForm.date.$invalid">
+          Valid date is required.
+        </div>
+      </div>
+
+      <!-- Fees -->
+      <div class="col-md-6">
+        <label class="form-label fw-bold">Registration Fees ($) * (0 or greater)</label>
+        <input type="number" name="fees" class="form-control" ng-model="form.fees" placeholder="0" min="0" required>
+        <div class="text-danger small mt-1 fw-bold" ng-show="eventForm.fees.$dirty && eventForm.fees.$invalid">
+          <span ng-show="eventForm.fees.$error.required">Fees amount is required.</span>
+          <span ng-show="eventForm.fees.$error.min">Fees cannot be negative.</span>
+        </div>
+      </div>
+
+      <!-- Organizer Name -->
+      <div class="col-md-6">
+        <label class="form-label fw-bold">Organizer Name *</label>
+        <input type="text" name="organizerName" class="form-control" ng-model="form.organizerName" placeholder="e.g. CS Department" required>
+        <div class="text-danger small mt-1 fw-bold" ng-show="eventForm.organizerName.$dirty && eventForm.organizerName.$invalid">
+          Organizer name is required.
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="col-12 mt-3">
+        <button type="submit" class="btn btn-success" ng-disabled="eventForm.$invalid">
+          {{ isEditing ? 'Update Event' : 'Create Event' }}
+        </button>
+        <button type="button" class="btn btn-secondary ms-2" ng-show="isEditing" ng-click="resetForm()">
+          Cancel Edit
+        </button>
+        <small class="text-muted ms-2" ng-if="eventForm.$invalid">
+          *(Fill in all required fields to enable submit)
+        </small>
+      </div>
+    </form>
+  </div>
+
+  <!-- Events List Table -->
+  <div class="card card-body">
+    <h4>Registered Events</h4>
+    <p ng-if="events.length === 0">No events registered yet. Use the form above to add an event!</p>
+    <table class="table table-striped table-bordered" ng-if="events.length > 0">
+      <thead class="table-primary">
+        <tr>
+          <th>Event ID</th>
+          <th>Title</th>
+          <th>Venue</th>
+          <th>Date</th>
+          <th>Fees ($)</th>
+          <th>Organizer</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="evt in events">
+          <td><strong>{{ evt.eventId }}</strong></td>
+          <td>{{ evt.title }}</td>
+          <td>{{ evt.venue }}</td>
+          <td>{{ evt.date }}</td>
+          <td>{{ evt.fees === 0 ? 'Free' : ('$' + evt.fees) }}</td>
+          <td>{{ evt.organizerName }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" ng-click="editEvent(evt)">Edit</button>
+            <button class="btn btn-danger btn-sm" ng-click="cancelEvent(evt.eventId)">Cancel</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+  <script>
+    angular.module("eventApp", [])
+      .controller("EventController", function($scope, $http, $timeout) {
+        const API = "/api/events";
+
+        $scope.events = [];
+        $scope.form = {};
+        $scope.isEditing = false;
+        $scope.message = "";
+        $scope.errorMessage = "";
+
+        // Show a green (or red) banner for 4 seconds
+        const showMessage = (msg, isError) => {
+          if (isError) $scope.errorMessage = msg;
+          else $scope.message = msg;
+          $timeout(() => { $scope.message = ""; $scope.errorMessage = ""; }, 4000);
+        };
+
+        // GET - load all events
+        const load = () => {
+          $http.get(API)
+            .then(res => { $scope.events = res.data; })
+            .catch(err => console.error("Error loading events:", err));
+        };
+
+        // Clear the form, leave edit mode, reset validation state
+        $scope.resetForm = () => {
+          $scope.form = {};
+          $scope.isEditing = false;
+          if ($scope.eventForm) {
+            $scope.eventForm.$setPristine();
+            $scope.eventForm.$setUntouched();
+          }
+        };
+
+        // POST (new) or PUT (edit), then refresh
+        $scope.saveEvent = () => {
+          const payload = angular.copy($scope.form);
+          if (payload.date instanceof Date) {
+            const d = payload.date;
+            const pad = n => (n < 10 ? "0" : "") + n;
+            payload.date = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+          }
+
+          const editing = $scope.isEditing;
+          const request = editing
+            ? $http.put(API + "/" + payload.eventId, payload)
+            : $http.post(API, payload);
+
+          request
+            .then(() => {
+              showMessage("Event '" + payload.title + "' " + (editing ? "updated" : "created") + " successfully!");
+              $scope.resetForm();
+              load();
+            })
+            .catch(err => {
+              showMessage("Failed to " + (editing ? "update" : "create") + " event: " + (err.data.error || err.statusText), true);
+            });
+        };
+
+        // Fill the form with the row to edit
+        $scope.editEvent = evt => {
+          $scope.form = angular.copy(evt);
+          if (evt.date) {
+            const parts = evt.date.split("-");
+            $scope.form.date = new Date(parts[0], parts[1] - 1, parts[2]);
+          }
+          $scope.isEditing = true;
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+
+        // DELETE after confirmation, then refresh
+        $scope.cancelEvent = id => {
+          if (!confirm("Are you sure you want to cancel event " + id + "?")) return;
+
+          $http.delete(API + "/" + id)
+            .then(() => {
+              showMessage("Event " + id + " has been cancelled.");
+              load();
+            })
+            .catch(err => {
+              showMessage("Failed to cancel event: " + (err.data.error || err.statusText), true);
+            });
+        };
+
+        load();
+      });
+  </script>
+</body>
+</html>

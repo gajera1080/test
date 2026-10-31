@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="">
+<head>
+  <title>Student Marks, Total, Average &amp; Pass/Fail</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body style="font-family: Arial; padding: 20px;">
+  <!-- Consolidates Journal Questions 4 and 5 -->
+  <h2>Student Marks Evaluation</h2>
+
+  Student Name: <input type="text" ng-model="name" placeholder="Name"><br><br>
+  Subject 1: <input type="number" ng-model="s1"><br><br>
+  Subject 2: <input type="number" ng-model="s2"><br><br>
+  Subject 3: <input type="number" ng-model="s3"><br><br>
+
+  <div ng-show="s1 !== undefined && s2 !== undefined && s3 !== undefined" style="background:#f9f9f9; padding:12px; width:320px; border-radius:6px;">
+    <!-- Q4: Total & Average -->
+    <p><b>Total Marks:</b> {{ s1 + s2 + s3 }} / 300</p>
+    <p><b>Average Marks:</b> {{ ((s1 + s2 + s3) / 3) | number:2 }}%</p>
+
+    <!-- Q5: Pass or Fail Result -->
+    <h3>Result for {{ name || 'Student' }}:
+      <span ng-if="((s1 + s2 + s3) / 3) >= 40" style="color: green;">PASSED</span>
+      <span ng-if="((s1 + s2 + s3) / 3) < 40" style="color: red;">FAILED</span>
+    </h3>
+  </div>
+</body>
+</html>

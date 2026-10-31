@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="" ng-init="tableRows = [1,2,3,4,5,6,7,8,9,10]">
+<head>
+  <title>AngularJS Numbers &amp; Multiplication Table</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body style="font-family: Arial; padding: 20px;">
+  <!-- Consolidates Journal Questions 2 and 7 -->
+  <h2>AngularJS Numerical Expressions &amp; ng-repeat</h2>
+
+  Enter a Number: <input type="number" ng-model="n" ng-init="n=5"><br><br>
+
+  <!-- Q2: Square and Cube -->
+  <p><b>Square:</b> {{ n * n }}</p>
+  <p><b>Cube:</b> {{ n * n * n }}</p>
+
+  <!-- Q7: Multiplication Table -->
+  <h3>Multiplication Table for {{ n }}:</h3>
+  <table border="1" cellpadding="6">
+    <tr ng-repeat="i in tableRows">
+      <td>{{ n }} &times; {{ i }}</td>
+      <td>=</td>
+      <td><b>{{ n * i }}</b></td>
+    </tr>
+  </table>
+</body>
+</html>
